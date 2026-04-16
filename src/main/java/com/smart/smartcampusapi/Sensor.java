@@ -1,9 +1,5 @@
 package com.smart.smartcampusapi;
 
-/**
- *
- * @author Stoyan
- */
 public class Sensor {
     
     private String id;

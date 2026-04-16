@@ -1,13 +1,42 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.smart.smartcampusapi;
 
-/**
- *
- * @author Stoyan
- */
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@Path("/")
 public class DiscoveryResource {
-    
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map<String, Object> getApiInfo() {
+
+        Map<String, Object> response = new HashMap<>();
+
+        // Basic API info
+        response.put("name", "Smart Campus Sensor & Room Management API");
+        response.put("version", "1.0");
+        response.put("description",
+                "RESTful API for managing campus rooms, sensors, and sensor readings.");
+        response.put("contact", "admin@smartcampus.university.ac.uk");
+
+        // Core resources
+        Map<String, String> resources = new HashMap<>();
+        resources.put("rooms", "/api/v1/rooms");
+        resources.put("sensors", "/api/v1/sensors");
+        response.put("resources", resources);
+
+        // HATEOAS-style links
+        Map<String, String> links = new HashMap<>();
+        links.put("self", "/api/v1");
+        links.put("rooms", "/api/v1/rooms");
+        links.put("sensors", "/api/v1/sensors");
+        response.put("_links", links);
+
+        return response;
+    }
 }
