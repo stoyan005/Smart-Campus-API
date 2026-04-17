@@ -4,6 +4,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
 import java.util.*;
 import com.smart.smartcampusapi.exception.LinkedResourceNotFoundException;
+import com.smart.smartcampusapi.SensorReadingResource;
 
 @Path("/sensors")
 @Produces(MediaType.APPLICATION_JSON)
@@ -90,6 +91,6 @@ public class SensorResource {
 
     @Path("/{id}/readings")
     public SensorReadingResource getReadingResource(@PathParam("id") String id) {
-        return new SensorReadingResource(id);
-    }
+        return new SensorReadingResource();
+}
 }

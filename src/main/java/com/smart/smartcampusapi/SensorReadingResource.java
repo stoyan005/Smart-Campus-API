@@ -2,18 +2,17 @@ package com.smart.smartcampusapi;
 
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
-import com.smart.smartcampusapi.exception.SensorUnavailableException;
-
 import java.util.*;
 
+@Path("/sensors/{id}/readings")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class SensorReadingResource {
 
-    private static Map<String, List<SensorReading>> readings = new HashMap<>();
+    @PathParam("id")
     private String sensorId;
 
-    public SensorReadingResource(String sensorId) {
-        this.sensorId = sensorId;
-    }
+    private static Map<String, List<SensorReading>> readings = new HashMap<>();
 
     @GET
     public List<SensorReading> getReadings() {
@@ -26,11 +25,9 @@ public class SensorReadingResource {
         Sensor sensor = SensorResource.sensors.get(sensorId);
 
         if (sensor == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-
-        if ("MAINTENANCE".equalsIgnoreCase(sensor.getStatus())) {
-            throw new SensorUnavailableException("Sensor is under maintenance");
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(Map.of("error", "Sensor not found"))
+                    .build();
         }
 
         reading.setId(UUID.randomUUID().toString());
@@ -39,6 +36,8 @@ public class SensorReadingResource {
 
         sensor.setCurrentValue(reading.getValue());
 
-        return Response.status(Response.Status.CREATED).entity(reading).build();
+        return Response.status(Response.Status.CREATED)
+                .entity(reading)
+                .build();
     }
 }
