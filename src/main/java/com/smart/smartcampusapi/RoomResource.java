@@ -3,8 +3,8 @@ package com.smart.smartcampusapi;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
 import java.util.*;
-import com.smart.smartcampusapi.exception.RoomNotEmptyException;
 
+import com.smart.smartcampusapi.exception.RoomNotEmptyException;
 
 @Path("/rooms")
 @Produces(MediaType.APPLICATION_JSON)
@@ -21,8 +21,24 @@ public class RoomResource {
     @POST
     public Response createRoom(Room room, @Context UriInfo uriInfo) {
 
+        if (room == null) {
+            return Response.status(400)
+                    .entity(Map.of("error", "Room cannot be null"))
+                    .build();
+        }
+
+        if (room.getName() == null || room.getName().isEmpty()) {
+            return Response.status(400)
+                    .entity(Map.of("error", "Room name is required"))
+                    .build();
+        }
+
         if (room.getId() == null || room.getId().isEmpty()) {
             room.setId(UUID.randomUUID().toString());
+        }
+
+        if (room.getSensorIds() == null) {
+            room.setSensorIds(new ArrayList<>());
         }
 
         rooms.put(room.getId(), room);
@@ -30,8 +46,7 @@ public class RoomResource {
         UriBuilder builder = uriInfo.getAbsolutePathBuilder();
         builder.path(room.getId());
 
-        return Response
-                .created(builder.build())
+        return Response.created(builder.build())
                 .entity(room)
                 .build();
     }
@@ -39,10 +54,13 @@ public class RoomResource {
     @GET
     @Path("/{id}")
     public Response getRoom(@PathParam("id") String id) {
+
         Room room = rooms.get(id);
 
         if (room == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(Map.of("error", "Room not found"))
+                    .build();
         }
 
         return Response.ok(room).build();
@@ -51,10 +69,13 @@ public class RoomResource {
     @DELETE
     @Path("/{id}")
     public Response deleteRoom(@PathParam("id") String id) {
+
         Room room = rooms.get(id);
 
         if (room == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(Map.of("error", "Room not found"))
+                    .build();
         }
 
         if (room.getSensorIds() != null && !room.getSensorIds().isEmpty()) {
@@ -62,6 +83,7 @@ public class RoomResource {
         }
 
         rooms.remove(id);
+
         return Response.noContent().build();
     }
 }
