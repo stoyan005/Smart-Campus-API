@@ -1,5 +1,7 @@
 package com.smart.smartcampusapi;
 
+import com.smart.smartcampusapi.model.SensorReading;
+import com.smart.smartcampusapi.model.Sensor;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
 import java.util.*;

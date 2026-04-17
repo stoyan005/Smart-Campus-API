@@ -1,5 +1,6 @@
 package com.smart.smartcampusapi;
 
+import com.smart.smartcampusapi.model.Room;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
 import java.util.*;

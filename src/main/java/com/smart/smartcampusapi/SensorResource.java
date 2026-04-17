@@ -1,10 +1,16 @@
 package com.smart.smartcampusapi;
 
+import com.smart.smartcampusapi.RoomResource;
+import com.smart.smartcampusapi.model.Sensor;
+import com.smart.smartcampusapi.model.Room;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
 import java.util.*;
 import com.smart.smartcampusapi.exception.LinkedResourceNotFoundException;
 import com.smart.smartcampusapi.SensorReadingResource;
+import com.smart.smartcampusapi.SensorReadingResource;
+import com.smart.smartcampusapi.model.Room;
+import com.smart.smartcampusapi.model.Sensor;
 
 @Path("/sensors")
 @Produces(MediaType.APPLICATION_JSON)
