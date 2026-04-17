@@ -3,6 +3,8 @@ package com.smart.smartcampusapi;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
 import java.util.*;
+import com.smart.smartcampusapi.exception.RoomNotEmptyException;
+
 
 @Path("/rooms")
 @Produces(MediaType.APPLICATION_JSON)
@@ -56,9 +58,7 @@ public class RoomResource {
         }
 
         if (room.getSensorIds() != null && !room.getSensorIds().isEmpty()) {
-            return Response.status(Response.Status.CONFLICT)
-                    .entity("Room has sensors, cannot delete")
-                    .build();
+            throw new RoomNotEmptyException("Room has sensors, cannot delete");
         }
 
         rooms.remove(id);

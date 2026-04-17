@@ -17,20 +17,17 @@ public class DiscoveryResource {
 
         Map<String, Object> response = new HashMap<>();
 
-        // Basic API info
         response.put("name", "Smart Campus Sensor & Room Management API");
         response.put("version", "1.0");
         response.put("description",
                 "RESTful API for managing campus rooms, sensors, and sensor readings.");
         response.put("contact", "admin@smartcampus.university.ac.uk");
 
-        // Core resources
         Map<String, String> resources = new HashMap<>();
         resources.put("rooms", "/api/v1/rooms");
         resources.put("sensors", "/api/v1/sensors");
         response.put("resources", resources);
 
-        // HATEOAS-style links
         Map<String, String> links = new HashMap<>();
         links.put("self", "/api/v1");
         links.put("rooms", "/api/v1/rooms");
