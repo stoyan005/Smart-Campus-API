@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project implements a RESTful API for managing a **Smart Campus system**, including Rooms, Sensors, and Sensor Readings.
+This project implements a RESTful API for managing a Smart Campus system, including Rooms, Sensors, and Sensor Readings. The API provides a structured way for clients to create, retrieve, update, and manage campus resources, enabling efficient monitoring of room usage and environmental data through connected sensors. It follows RESTful principles, using clear resource-based endpoints, appropriate HTTP methods, and JSON for data exchange, ensuring scalability, maintainability, and ease of integration with other systems.
 
 The API follows REST principles:
 
