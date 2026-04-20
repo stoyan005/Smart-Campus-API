@@ -47,7 +47,9 @@ public class SensorResource {
         }
 
         if (sensor.getId() == null || sensor.getId().isEmpty()) {
-            sensor.setId(UUID.randomUUID().toString());
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(Map.of("error", "Sensor ID is required"))
+                    .build();
         }
 
         sensors.put(sensor.getId(), sensor);

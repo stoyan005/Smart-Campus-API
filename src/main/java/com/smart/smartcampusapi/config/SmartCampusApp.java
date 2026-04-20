@@ -1,4 +1,4 @@
-package com.smart.smartcampusapi;
+package com.smart.smartcampusapi.config;
 
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;

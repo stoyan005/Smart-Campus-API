@@ -33,7 +33,9 @@ public class RoomResource {
         }
 
         if (room.getId() == null || room.getId().isEmpty()) {
-            room.setId(UUID.randomUUID().toString());
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(Map.of("error", "Room ID is required"))
+                    .build();
         }
 
         if (room.getSensorIds() == null) {
