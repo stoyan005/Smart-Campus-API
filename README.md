@@ -4,7 +4,9 @@
 
 This project implements a RESTful API for managing a Smart Campus system, including Rooms, Sensors, and Sensor Readings. The API provides a structured way for clients to create, retrieve, update, and manage campus resources, enabling efficient monitoring of room usage and environmental data through connected sensors. It follows RESTful principles, using clear resource-based endpoints, appropriate HTTP methods, and JSON for data exchange, ensuring scalability, maintainability, and ease of integration with other systems.
 
-The API follows REST principles:
+---
+
+**The API follows REST principles:**
 
 * Resource-based URLs
 * Proper HTTP methods
@@ -19,19 +21,55 @@ The API follows REST principles:
 
 ---
 
-## API Design Highlights
+## API Features & Highlights
 
-* Built using **JAX-RS (Jersey)**
-* Versioned API: `/api/v1`
-* In-memory storage using `HashMap` / `ArrayList`
-* Nested resources for readings
-* Filtering using query parameters
-* Custom exception handling (409, 422, 403, 500)
-* Logging via JAX-RS filters
+- Built using JAX-RS (Jersey)
+- Versioned API: `/api/v1`
+- In-memory storage (HashMap / ArrayList)
+- Nested resources (sensor readings)
+- Query parameter filtering
+- Custom exception handling:
+  - 409 Conflict
+  - 422 Unprocessable Entity
+  - 403 Forbidden
+  - 500 Internal Server Error
+- Logging using JAX-RS filters
 
 ---
 
-## ⚙️ How to Build & Run
+## How to Run (NetBeans)
+
+1. Open NetBeans
+2. Click **File → Open Project**
+3. Select the project folder: `smart-campus-api`
+4. Wait for Maven dependencies to load
+5. Right-click project → **Clean and Build**
+6. Right-click project → **Run**
+7. Open:
+
+---
+
+## How to Run (IntelliJ IDEA)
+
+1. Open IntelliJ IDEA
+2. Click **Open**
+3. Select project folder: `smart-campus-api`
+4. Wait for Maven import to finish
+5. Run:
+```bash
+mvn clean install
+```
+```bash
+mvn jetty:run
+```
+```bash
+http://localhost:8080/api/v1
+```
+
+---
+
+
+## How to Build & Run
 
 ### 1. Clone Repository
 
@@ -66,7 +104,7 @@ http://localhost:8080/api/v1
 
 ---
 
-## Sample cURL Commands
+## cURL Commands
 
 ### 1. Get API Discovery
 
@@ -76,7 +114,7 @@ curl -X GET http://localhost:8080/api/v1
 
 ---
 
-### 2. Create a Room
+### 2. Create a Room (POST)
 
 ```bash
 curl -X POST http://localhost:8080/api/v1/rooms \
@@ -88,17 +126,23 @@ curl -X POST http://localhost:8080/api/v1/rooms \
 }'
 ```
 
----
-
-### 3. Get All Rooms
-
+### 2.1 Get All Rooms (GET)
 ```bash
 curl -X GET http://localhost:8080/api/v1/rooms
 ```
 
+### 2.2 Get Room by ID (GET)
+```bash
+curl -X GET http://localhost:8080/api/v1/rooms/LIB-301
+```
+
+### 2.3 Delete Room (DELETE)
+```bash
+curl -X DELETE http://localhost:8080/api/v1/rooms/LIB-301
+```
 ---
 
-### 4. Create a Sensor
+### 3. Create a Sensor
 
 ```bash
 curl -X POST http://localhost:8080/api/v1/sensors \
@@ -112,17 +156,28 @@ curl -X POST http://localhost:8080/api/v1/sensors \
 }'
 ```
 
----
+### 3.1 Get All Sensors (GET)
+```bash
+curl -X GET http://localhost:8080/api/v1/sensors
+```
 
-### 5. Filter Sensors by Type
+### 3.2 Get Sensor by ID (GET)
+```bash
+curl -X GET http://localhost:8080/api/v1/sensors/TEMP-001
+```
 
+### 3.3 Filter Sensors by Type
 ```bash
 curl -X GET "http://localhost:8080/api/v1/sensors?type=Temperature"
 ```
 
+### 3.4 Delete Sensor (DELETE)
+```bash
+curl -X DELETE http://localhost:8080/api/v1/sensors/TEMP-001
+```
 ---
 
-### 6. Add Sensor Reading
+### 4. Add Sensor Reading
 
 ```bash
 curl -X POST http://localhost:8080/api/v1/sensors/TEMP-001/readings \
@@ -134,9 +189,19 @@ curl -X POST http://localhost:8080/api/v1/sensors/TEMP-001/readings \
 }'
 ```
 
+### 4.1 Get All Readings (GET)
+```bash
+curl -X GET http://localhost:8080/api/v1/sensors/TEMP-001/readings
+```
+
+### 4.2 Get Reading by ID (GET)
+```bash
+curl -X GET http://localhost:8080/api/v1/sensors/TEMP-001/readings/r1
+```
+
 ---
 
-### 7. Delete Room (Fails if sensors exist)
+### 5. Delete Room (Fails if sensors exist)
 
 ```bash
 curl -X DELETE http://localhost:8080/api/v1/rooms/LIB-301
@@ -165,18 +230,21 @@ curl -X DELETE http://localhost:8080/api/v1/rooms/LIB-301
 
 ## Notes
 
-* No database used (as required)
+* No database used (in-memory storage only as required)
 * Uses in-memory data structures
+* Rooms must exist before sensors are created
+* Sensors must exist before readings are added
+* Rooms cannot be deleted if sensors exist
 * Designed for scalability and maintainability
 
 ---
 
 ## Demo
 
-Include your video demo link here:
+Link to Video:
 
 ```
-[Paste your Blackboard or YouTube link]
+[video will go here when finished]
 ```
 
 ---
