@@ -14,7 +14,7 @@ This project implements a RESTful API for managing a Smart Campus system, includ
 * JSON communication
 
 ### Core Resources
-### Base Path: ```bash /api/v1```
+### Base Path: ```/api/v1```
 
 * Discovery – GET / – ```Returns API metadata and resource links```
 * Rooms – ```/rooms```
