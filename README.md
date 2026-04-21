@@ -30,7 +30,7 @@ Sensors – /sensors
 ---
 Sensor Readings (nested sub-resource)
 * GET /sensors/{sensorId}/readings – ```bash Get reading history```
-* POST /sensors/{sensorId}/readings – ```bash Add a new reading (updates sensor’s currentValue)```
+* POST /sensors/{sensorId}/readings – ```bash Add a new reading```
 
 ---
 
