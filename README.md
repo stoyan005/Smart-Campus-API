@@ -16,21 +16,21 @@ This project implements a RESTful API for managing a Smart Campus system, includ
 ### Core Resources
 ### Base Path: ```bash /api/v1```
 
-* Discovery – GET / – ```bash Returns API metadata and resource links```
-* Rooms – ```bash /rooms```
-* GET /rooms – ```bash List all rooms```
-* POST /rooms – ```bash Create a new room```
-* GET /rooms/{roomId} – ```bash Get room by ID```
-* DELETE /rooms/{roomId} – ```bash Delete a room (with safety check)```
+* Discovery – GET / – ```Returns API metadata and resource links```
+* Rooms – ```/rooms```
+* GET /rooms – ```List all rooms```
+* POST /rooms – ```Create a new room```
+* GET /rooms/{roomId} – ```Get room by ID```
+* DELETE /rooms/{roomId} – ```Delete a room (with safety check)```
 ---
 Sensors – /sensors
-* GET /sensors – ```bash List all sensors (includes ?type=CO2)```
-* POST /sensors – ```bash Create a new sensor```
-* GET /sensors/{sensorId} – ```bash Get sensor by ID```
+* GET /sensors – ```List all sensors (includes ?type=CO2)```
+* POST /sensors – ```Create a new sensor```
+* GET /sensors/{sensorId} – ```Get sensor by ID```
 ---
 Sensor Readings (nested sub-resource)
-* GET /sensors/{sensorId}/readings – ```bash Get reading history```
-* POST /sensors/{sensorId}/readings – ```bash Add a new reading```
+* GET /sensors/{sensorId}/readings – ```Get reading history```
+* POST /sensors/{sensorId}/readings – ```Add a new reading```
 
 ---
 
