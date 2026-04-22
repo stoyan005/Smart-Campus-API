@@ -52,6 +52,17 @@ Sensor Readings (nested sub-resource)
 
 ## How to Run (NetBeans)
 
+## Prerequisites
+
+Make sure you have the following installed:
+
+* Java JDK (8 or higher)
+* Apache Maven
+* Apache Tomcat (configured in NetBeans)
+* NetBeans IDE (with Java EE support)
+
+---
+
 1. Open NetBeans
 2. Click **File → Open Project**
 3. Select the project folder: `smart-campus-api`
